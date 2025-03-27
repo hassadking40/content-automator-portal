@@ -8,6 +8,17 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import Features from "./pages/Features";
+import Pricing from "./pages/Pricing";
+import About from "./pages/About";
+import Integrations from "./pages/Integrations";
+import Testimonials from "./pages/Testimonials";
+import Blog from "./pages/Blog";
+import Careers from "./pages/Careers";
+import Contact from "./pages/Contact";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import Cookies from "./pages/Cookies";
 
 const queryClient = new QueryClient();
 
@@ -21,38 +32,23 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/features" element={<NotFoundPageWithMessage message="Features page coming soon" />} />
-            <Route path="/pricing" element={<NotFoundPageWithMessage message="Pricing page coming soon" />} />
-            <Route path="/about" element={<NotFoundPageWithMessage message="About page coming soon" />} />
-            <Route path="/integrations" element={<NotFoundPageWithMessage message="Integrations page coming soon" />} />
-            <Route path="/testimonials" element={<NotFoundPageWithMessage message="Testimonials page coming soon" />} />
-            <Route path="/blog" element={<NotFoundPageWithMessage message="Blog page coming soon" />} />
-            <Route path="/careers" element={<NotFoundPageWithMessage message="Careers page coming soon" />} />
-            <Route path="/contact" element={<NotFoundPageWithMessage message="Contact page coming soon" />} />
-            <Route path="/terms" element={<NotFoundPageWithMessage message="Terms page coming soon" />} />
-            <Route path="/privacy" element={<NotFoundPageWithMessage message="Privacy page coming soon" />} />
-            <Route path="/cookies" element={<NotFoundPageWithMessage message="Cookies page coming soon" />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/integrations" element={<Integrations />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/cookies" element={<Cookies />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>
-);
-
-// Helper component for placeholder routes
-const NotFoundPageWithMessage = ({ message }: { message: string }) => (
-  <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-sahla-dark/30">
-    <div className="text-center">
-      <h1 className="text-4xl font-bold mb-4 font-display bg-clip-text text-transparent bg-gradient-to-r from-sahla-blue to-sahla-purple">
-        Coming Soon
-      </h1>
-      <p className="text-xl text-gray-600 dark:text-gray-300 mb-4">{message}</p>
-      <a href="/" className="text-primary hover:text-primary/80 underline transition-colors">
-        Return to Home
-      </a>
-    </div>
-  </div>
 );
 
 export default App;
