@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
@@ -70,7 +70,7 @@ const Header = () => {
           {/* Action Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
-              <UserMenu email={user.email} onSignOut={handleSignOut} />
+              <UserMenu email={user.email || "User"} onSignOut={handleSignOut} />
             ) : (
               <AuthButtons />
             )}

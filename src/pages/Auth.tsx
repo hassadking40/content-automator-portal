@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button-custom";
 import { Input } from "@/components/ui/input";
@@ -16,10 +16,11 @@ const Auth = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { user, signIn, signUp } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
-  // If user is already logged in, redirect to home page
+  // If user is already logged in, redirect to dashboard
   if (user) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -32,11 +33,21 @@ const Auth = () => {
           throw new Error("Full name is required");
         }
         await signUp(email, password, fullName);
+        toast({
+          title: "Check your email",
+          description: "We've sent you a confirmation link to activate your account.",
+        });
       } else {
         await signIn(email, password);
+        navigate("/dashboard");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Authentication error:", error);
+      toast({
+        variant: "destructive",
+        title: "Authentication failed",
+        description: error.message || "Please check your credentials and try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -123,6 +134,7 @@ const Auth = () => {
                   className="pl-10"
                   placeholder="********"
                   required
+                  minLength={6}
                 />
               </div>
             </div>
