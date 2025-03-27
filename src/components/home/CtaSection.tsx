@@ -3,10 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button-custom";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const CtaSection = () => {
   const ctaRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -67,21 +70,25 @@ const CtaSection = () => {
                   isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
                 )}
               >
-                <Button 
-                  variant="default" 
-                  size="lg" 
-                  className="bg-white text-sahla-dark hover:bg-white/90 font-medium"
-                >
-                  Start Your Free Trial
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg" 
-                  className="border-white text-white hover:bg-white/10 font-medium"
-                >
-                  Schedule a Demo
-                </Button>
+                <Link to={user ? "/dashboard" : "/auth"}>
+                  <Button 
+                    variant="default" 
+                    size="lg" 
+                    className="bg-white text-sahla-dark hover:bg-white/90 font-medium"
+                  >
+                    Start Your Free Trial
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link to={user ? "/dashboard" : "/auth"}>
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="border-white text-white hover:bg-white/10 font-medium"
+                  >
+                    Schedule a Demo
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

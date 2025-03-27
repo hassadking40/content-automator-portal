@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button-custom";
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface PricingPlan {
   name: string;
@@ -63,6 +65,7 @@ const plans: PricingPlan[] = [
 const PricingSection = () => {
   const pricingRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -161,13 +164,15 @@ const PricingSection = () => {
                 ))}
               </ul>
               
-              <Button
-                className="w-full font-medium"
-                variant={plan.isPopular ? "gradient" : "outline"}
-                shine={plan.isPopular}
-              >
-                {plan.cta}
-              </Button>
+              <Link to={user ? "/dashboard" : "/auth"}>
+                <Button
+                  className="w-full font-medium"
+                  variant={plan.isPopular ? "gradient" : "outline"}
+                  shine={plan.isPopular}
+                >
+                  {plan.cta}
+                </Button>
+              </Link>
             </div>
           ))}
         </div>

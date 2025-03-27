@@ -1,10 +1,8 @@
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button-custom";
 
 const AuthButtons = () => {
-  const navigate = useNavigate();
-  
   return (
     <>
       <Link to="/auth">
@@ -22,7 +20,6 @@ const AuthButtons = () => {
           size="sm"
           shine
           className="font-medium"
-          onClick={() => navigate("/auth")}
         >
           Get Started
         </Button>

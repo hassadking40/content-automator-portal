@@ -2,8 +2,12 @@
 import PageLayout from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button-custom";
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Pricing = () => {
+  const { user } = useAuth();
+  
   return (
     <PageLayout 
       title="Pricing" 
@@ -35,12 +39,14 @@ const Pricing = () => {
                 </li>
               ))}
             </ul>
-            <Button 
-              variant={plan.popular ? "gradient" : "outline"} 
-              className="w-full"
-            >
-              Get Started
-            </Button>
+            <Link to={user ? "/dashboard" : "/auth"}>
+              <Button 
+                variant={plan.popular ? "gradient" : "outline"} 
+                className="w-full"
+              >
+                Get Started
+              </Button>
+            </Link>
           </div>
         ))}
       </div>
