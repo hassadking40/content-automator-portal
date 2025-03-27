@@ -4,34 +4,39 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/features" element={<NotFoundPageWithMessage message="Features page coming soon" />} />
-          <Route path="/pricing" element={<NotFoundPageWithMessage message="Pricing page coming soon" />} />
-          <Route path="/about" element={<NotFoundPageWithMessage message="About page coming soon" />} />
-          <Route path="/integrations" element={<NotFoundPageWithMessage message="Integrations page coming soon" />} />
-          <Route path="/testimonials" element={<NotFoundPageWithMessage message="Testimonials page coming soon" />} />
-          <Route path="/blog" element={<NotFoundPageWithMessage message="Blog page coming soon" />} />
-          <Route path="/careers" element={<NotFoundPageWithMessage message="Careers page coming soon" />} />
-          <Route path="/contact" element={<NotFoundPageWithMessage message="Contact page coming soon" />} />
-          <Route path="/terms" element={<NotFoundPageWithMessage message="Terms page coming soon" />} />
-          <Route path="/privacy" element={<NotFoundPageWithMessage message="Privacy page coming soon" />} />
-          <Route path="/cookies" element={<NotFoundPageWithMessage message="Cookies page coming soon" />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/features" element={<NotFoundPageWithMessage message="Features page coming soon" />} />
+            <Route path="/pricing" element={<NotFoundPageWithMessage message="Pricing page coming soon" />} />
+            <Route path="/about" element={<NotFoundPageWithMessage message="About page coming soon" />} />
+            <Route path="/integrations" element={<NotFoundPageWithMessage message="Integrations page coming soon" />} />
+            <Route path="/testimonials" element={<NotFoundPageWithMessage message="Testimonials page coming soon" />} />
+            <Route path="/blog" element={<NotFoundPageWithMessage message="Blog page coming soon" />} />
+            <Route path="/careers" element={<NotFoundPageWithMessage message="Careers page coming soon" />} />
+            <Route path="/contact" element={<NotFoundPageWithMessage message="Contact page coming soon" />} />
+            <Route path="/terms" element={<NotFoundPageWithMessage message="Terms page coming soon" />} />
+            <Route path="/privacy" element={<NotFoundPageWithMessage message="Privacy page coming soon" />} />
+            <Route path="/cookies" element={<NotFoundPageWithMessage message="Cookies page coming soon" />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 
