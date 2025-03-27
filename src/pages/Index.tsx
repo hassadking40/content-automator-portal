@@ -1,7 +1,6 @@
 
 import { useEffect } from "react";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import PageLayout from "@/components/layout/PageLayout";
 import HeroSection from "@/components/home/HeroSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import PlatformsSection from "@/components/home/PlatformsSection";
@@ -54,17 +53,13 @@ const Index = () => {
   }, []);
   
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-grow">
-        <HeroSection />
-        <FeaturesSection />
-        <PlatformsSection />
-        <PricingSection />
-        <CtaSection />
-      </main>
-      <Footer />
-    </div>
+    <PageLayout title="Welcome to Our Platform" description="Your all-in-one solution for digital success">
+      <HeroSection />
+      <FeaturesSection />
+      <PlatformsSection />
+      <PricingSection />
+      <CtaSection />
+    </PageLayout>
   );
 };
 
