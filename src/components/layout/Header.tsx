@@ -80,6 +80,14 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
+            {user && (
+              <Link
+                to="/dashboard"
+                className="text-sahla-dark/80 dark:text-white/80 hover:text-primary transition-colors duration-200 font-medium"
+              >
+                Dashboard
+              </Link>
+            )}
           </nav>
 
           {/* Action Buttons */}
@@ -173,6 +181,15 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
+            {user && (
+              <Link
+                to="/dashboard"
+                className="text-sahla-dark dark:text-white text-lg font-medium py-2 border-b border-border"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+            )}
           </nav>
           <div className="flex flex-col space-y-4 mt-auto mb-12">
             {user ? (
