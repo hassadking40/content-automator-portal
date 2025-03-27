@@ -32,11 +32,29 @@ const Auth = () => {
         if (!fullName.trim()) {
           throw new Error("Full name is required");
         }
-        await signUp(email, password, fullName);
-        toast({
-          title: "Check your email",
-          description: "We've sent you a confirmation link to activate your account.",
-        });
+        
+        // Try to sign up the user
+        const { error, existingEmail } = await signUp(email, password, fullName);
+        
+        if (error) {
+          if (existingEmail) {
+            // Show a specific message for existing email
+            toast({
+              variant: "destructive",
+              title: "Email already in use",
+              description: "This email is already registered. Please sign in instead.",
+            });
+            // Automatically switch to sign in mode
+            setIsSignUp(false);
+          } else {
+            throw error;
+          }
+        } else {
+          toast({
+            title: "Check your email",
+            description: "We've sent you a confirmation link to activate your account.",
+          });
+        }
       } else {
         await signIn(email, password);
         navigate("/dashboard");

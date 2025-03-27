@@ -9,7 +9,7 @@ type AuthContextType = {
   session: Session | null;
   isLoading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string, fullName: string) => Promise<void>;
+  signUp: (email: string, password: string, fullName: string) => Promise<{ error: Error | null, existingEmail: boolean }>;
   signOut: () => Promise<void>;
 };
 
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signUp = async (email: string, password: string, fullName: string) => {
     try {
-      const { error } = await supabase.auth.signUp({
+      const { error, data } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -81,20 +81,40 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
       
       if (error) {
+        // Check if this is an "Email already registered" error
+        const isEmailExistsError = error.message.toLowerCase().includes("email already registered") || 
+                                  error.message.toLowerCase().includes("user already registered");
+        
+        if (isEmailExistsError) {
+          toast({
+            variant: "warning",
+            title: "Email already registered",
+            description: "This email is already in use. Please sign in instead.",
+          });
+          return { error: null, existingEmail: true };
+        }
+        
         throw error;
       }
       
-      toast({
-        title: "Account created!",
-        description: "Please check your email to confirm your registration.",
-      });
+      // This message will only be shown if there was no error
+      if (data.user) {
+        toast({
+          title: "Account created!",
+          description: "Please check your email to confirm your registration.",
+        });
+      }
+      
+      return { error: null, existingEmail: false };
     } catch (error: any) {
+      // For other errors
       toast({
         variant: "destructive",
         title: "Sign up failed",
         description: error.message || "Please try again with different credentials.",
       });
-      throw error;
+      
+      return { error, existingEmail: false };
     }
   };
 
