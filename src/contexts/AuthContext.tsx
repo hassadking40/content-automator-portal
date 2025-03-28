@@ -87,7 +87,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         
         if (isEmailExistsError) {
           toast({
-            variant: "warning",
+            // Fix: Change "warning" to "default" as the warning variant is not defined
+            variant: "default",
             title: "Email already registered",
             description: "This email is already in use. Please sign in instead.",
           });
