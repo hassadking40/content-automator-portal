@@ -117,36 +117,42 @@ const Dashboard = () => {
   const selectedWorkflow = workflowTypes.find(w => w.type === selectedWorkflowType);
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen">
       <DashboardSidebar />
       
-      <div className="flex-1 overflow-y-auto">
-        <div className="p-8 max-w-7xl mx-auto">
-          <h1 className="text-2xl font-semibold text-gray-900">Create your first workflow</h1>
-          <p className="text-gray-500 mt-2">A workflow automates taking content from one platform and publishing it to another.</p>
+      <div className="flex-1 overflow-y-auto bg-gradient-to-br from-sahla-purple/5 via-sahla-blue/5 to-sahla-indigo/10">
+        <div className="relative">
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-sahla-purple/10 rounded-full blur-3xl -z-10 transform translate-x-1/3 -translate-y-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-sahla-blue/10 rounded-full blur-3xl -z-10 transform -translate-x-1/3 translate-y-1/3"></div>
+          
+          <div className="p-8 max-w-7xl mx-auto">
+            <h1 className="text-2xl font-semibold text-gray-900">Create your first workflow</h1>
+            <p className="text-gray-500 mt-2">A workflow automates taking content from one platform and publishing it to another.</p>
 
-          <div className="mt-8">
-            <h2 className="text-lg font-medium text-gray-800 mb-4">Choose a workflow type</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {workflowTypes.map((workflow) => (
-                <WorkflowCard
-                  key={workflow.type}
-                  title={workflow.title}
-                  description={workflow.description}
-                  icon={workflow.icon}
-                  isSelected={selectedWorkflowType === workflow.type}
-                  onClick={() => setSelectedWorkflowType(workflow.type)}
+            <div className="mt-8">
+              <h2 className="text-lg font-medium text-gray-800 mb-4">Choose a workflow type</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {workflowTypes.map((workflow) => (
+                  <WorkflowCard
+                    key={workflow.type}
+                    title={workflow.title}
+                    description={workflow.description}
+                    icon={workflow.icon}
+                    isSelected={selectedWorkflowType === workflow.type}
+                    onClick={() => setSelectedWorkflowType(workflow.type)}
+                  />
+                ))}
+              </div>
+
+              {selectedWorkflow && (
+                <WorkflowConfig
+                  title={selectedWorkflow.title}
+                  description={selectedWorkflow.description}
                 />
-              ))}
+              )}
             </div>
-
-            {selectedWorkflow && (
-              <WorkflowConfig
-                title={selectedWorkflow.title}
-                description="Whenever you upload new content to your Source platform, it will be automatically published to your Destination within 2 hours."
-              />
-            )}
           </div>
         </div>
       </div>

@@ -37,9 +37,9 @@ const WorkflowConfig = ({ title, description }: WorkflowConfigProps) => {
   };
 
   return (
-    <div className="bg-white rounded-md p-6 mt-6 border">
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 mt-6 border shadow-sm">
       <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-      <p className="text-gray-500 text-sm mt-1 mb-6">{description}</p>
+      <p className="text-gray-500 text-sm mt-1 mb-6">Whenever you upload new content to your Source platform, it will be automatically published to your Destination within 2 hours.</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div>
@@ -49,7 +49,7 @@ const WorkflowConfig = ({ title, description }: WorkflowConfigProps) => {
               <div 
                 key={platform.id}
                 className={`
-                  flex items-center gap-3 p-3 border rounded-md cursor-pointer
+                  flex items-center gap-3 p-3 border rounded-md cursor-pointer transition-all
                   ${sourceSelection === platform.id ? 'border-sahla-purple bg-sahla-purple/5' : 'hover:bg-gray-50'}
                 `}
                 onClick={() => {
@@ -78,7 +78,7 @@ const WorkflowConfig = ({ title, description }: WorkflowConfigProps) => {
               <div 
                 key={platform.id}
                 className={`
-                  flex items-center gap-3 p-3 border rounded-md cursor-pointer
+                  flex items-center gap-3 p-3 border rounded-md cursor-pointer transition-all
                   ${destinationSelection === platform.id ? 'border-sahla-purple bg-sahla-purple/5' : 'hover:bg-gray-50'}
                 `}
                 onClick={() => setDestinationSelection(platform.id)}
@@ -93,7 +93,7 @@ const WorkflowConfig = ({ title, description }: WorkflowConfigProps) => {
 
       <div className="mt-10">
         <Button 
-          variant="gradient"
+          variant={sourceSelection && destinationSelection ? "gradient" : "default"}
           className="w-full py-3 text-center"
           disabled={!sourceSelection || !destinationSelection}
           onClick={handleCreateWorkflow}

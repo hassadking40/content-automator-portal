@@ -38,7 +38,7 @@ const DashboardSidebar = () => {
   ];
 
   return (
-    <div className="h-screen w-64 border-r bg-white flex flex-col">
+    <div className="h-screen w-64 border-r bg-white/80 backdrop-blur-sm flex flex-col shadow-sm">
       <div className="p-4 border-b">
         <h2 className="text-xl font-bold flex items-center text-sahla-purple">
           Sahla-Post
@@ -53,7 +53,7 @@ const DashboardSidebar = () => {
               key={index}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center px-3 py-2 rounded-md text-sm ${
+                `flex items-center px-3 py-2 rounded-md text-sm transition-all ${
                   isActive 
                     ? "bg-sahla-purple/10 text-sahla-purple font-medium" 
                     : "text-gray-700 hover:bg-gray-100"
@@ -75,7 +75,7 @@ const DashboardSidebar = () => {
                 key={index}
                 to={item.path}
                 className={({ isActive }) =>
-                  `flex items-center px-3 py-2 rounded-md text-sm ${
+                  `flex items-center px-3 py-2 rounded-md text-sm transition-all ${
                     isActive 
                       ? "bg-sahla-purple/10 text-sahla-purple font-medium" 
                       : "text-gray-700 hover:bg-gray-100"
@@ -97,7 +97,7 @@ const DashboardSidebar = () => {
                 key={index}
                 to={item.path}
                 className={({ isActive }) =>
-                  `flex items-center px-3 py-2 rounded-md text-sm ${
+                  `flex items-center px-3 py-2 rounded-md text-sm transition-all ${
                     isActive 
                       ? "bg-sahla-purple/10 text-sahla-purple font-medium" 
                       : "text-gray-700 hover:bg-gray-100"
@@ -123,7 +123,10 @@ const DashboardSidebar = () => {
           <div className="flex-1 truncate">
             <p className="text-sm font-medium truncate">{user?.email}</p>
           </div>
-          <button onClick={() => signOut()} className="text-gray-500 hover:text-gray-700">
+          <button 
+            onClick={() => signOut()} 
+            className="text-gray-500 hover:text-gray-700 transition-colors"
+          >
             <LogOut size={18} />
           </button>
         </div>
