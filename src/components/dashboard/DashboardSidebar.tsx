@@ -14,9 +14,11 @@ import {
   LogOut
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const DashboardSidebar = () => {
   const { user, signOut } = useAuth();
+  const isMobile = useIsMobile();
   
   const navItems = [
     { icon: <ArrowRightLeft size={20} className="text-sahla-purple" />, label: "Create Workflow", path: "/dashboard" },
@@ -38,7 +40,7 @@ const DashboardSidebar = () => {
   ];
 
   return (
-    <div className="h-screen w-64 border-r bg-white/80 backdrop-blur-sm flex flex-col shadow-sm">
+    <div className="h-full w-full md:w-64 border-r bg-white/80 backdrop-blur-sm flex flex-col shadow-sm">
       <div className="p-4 border-b">
         <h2 className="text-xl font-bold flex items-center text-sahla-purple">
           Sahla-Post
