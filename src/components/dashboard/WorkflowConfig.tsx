@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button-custom";
+import { useToast } from "@/hooks/use-toast";
 
 interface PlatformOption {
   id: string;
@@ -24,6 +25,16 @@ interface WorkflowConfigProps {
 const WorkflowConfig = ({ title, description }: WorkflowConfigProps) => {
   const [sourceSelection, setSourceSelection] = useState<string | null>(null);
   const [destinationSelection, setDestinationSelection] = useState<string | null>(null);
+  const { toast } = useToast();
+
+  const handleCreateWorkflow = () => {
+    if (!sourceSelection || !destinationSelection) return;
+    
+    toast({
+      title: "Workflow Created",
+      description: `Workflow created to send content from ${sourceSelection} to ${destinationSelection}`,
+    });
+  };
 
   return (
     <div className="bg-white rounded-md p-6 mt-6 border">
@@ -41,7 +52,13 @@ const WorkflowConfig = ({ title, description }: WorkflowConfigProps) => {
                   flex items-center gap-3 p-3 border rounded-md cursor-pointer
                   ${sourceSelection === platform.id ? 'border-sahla-purple bg-sahla-purple/5' : 'hover:bg-gray-50'}
                 `}
-                onClick={() => setSourceSelection(platform.id)}
+                onClick={() => {
+                  setSourceSelection(platform.id);
+                  // Reset destination if it's the same as the new source
+                  if (destinationSelection === platform.id) {
+                    setDestinationSelection(null);
+                  }
+                }}
               >
                 <img src={platform.logo} alt={platform.name} className="w-6 h-6" />
                 <span>{platform.name}</span>
@@ -79,6 +96,7 @@ const WorkflowConfig = ({ title, description }: WorkflowConfigProps) => {
           variant="gradient"
           className="w-full py-3 text-center"
           disabled={!sourceSelection || !destinationSelection}
+          onClick={handleCreateWorkflow}
         >
           Create Workflow
         </Button>

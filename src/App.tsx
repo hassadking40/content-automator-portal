@@ -20,6 +20,14 @@ import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Cookies from "./pages/Cookies";
+import Connections from "./pages/dashboard/Connections";
+import Templates from "./pages/dashboard/Templates";
+import Calendar from "./pages/dashboard/Calendar";
+import Affiliate from "./pages/dashboard/Affiliate";
+import Support from "./pages/dashboard/Support";
+import FeatureRequest from "./pages/dashboard/FeatureRequest";
+import Announcements from "./pages/dashboard/Announcements";
+import Settings from "./pages/dashboard/Settings";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +42,14 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/connections" element={<Connections />} />
+            <Route path="/dashboard/templates" element={<Templates />} />
+            <Route path="/dashboard/calendar" element={<Calendar />} />
+            <Route path="/dashboard/affiliate" element={<Affiliate />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/feature-request" element={<FeatureRequest />} />
+            <Route path="/announcements" element={<Announcements />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/features" element={<Features />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/about" element={<About />} />

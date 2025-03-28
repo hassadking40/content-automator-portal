@@ -10,7 +10,8 @@ import {
   HelpCircle, 
   MessageSquareHeart, 
   Sparkles,
-  ArrowRightLeft
+  ArrowRightLeft,
+  LogOut
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -18,22 +19,22 @@ const DashboardSidebar = () => {
   const { user, signOut } = useAuth();
   
   const navItems = [
-    { icon: <ArrowRightLeft size={20} />, label: "Create Workflow", path: "/dashboard" },
-    { icon: <RefreshCw size={20} />, label: "Connections", path: "/dashboard/connections" },
-    { icon: <FileText size={20} />, label: "Templates", path: "/dashboard/templates" },
-    { icon: <Calendar size={20} />, label: "Calendar", path: "/dashboard/calendar" },
+    { icon: <ArrowRightLeft size={20} className="text-sahla-purple" />, label: "Create Workflow", path: "/dashboard" },
+    { icon: <RefreshCw size={20} className="text-sahla-purple" />, label: "Connections", path: "/dashboard/connections" },
+    { icon: <FileText size={20} className="text-sahla-purple" />, label: "Templates", path: "/dashboard/templates" },
+    { icon: <Calendar size={20} className="text-sahla-purple" />, label: "Calendar", path: "/dashboard/calendar" },
   ];
   
   const secondaryNavItems = [
-    { icon: <Sparkles size={20} />, label: "Upgrade Here", path: "/pricing" },
-    { icon: <Award size={20} />, label: "Affiliate Area", path: "/dashboard/affiliate" },
+    { icon: <Sparkles size={20} className="text-sahla-purple" />, label: "Upgrade Here", path: "/pricing" },
+    { icon: <Award size={20} className="text-sahla-purple" />, label: "Affiliate Area", path: "/dashboard/affiliate" },
   ];
   
   const supportNavItems = [
-    { icon: <HelpCircle size={20} />, label: "Support", path: "/support" },
-    { icon: <MessageSquareHeart size={20} />, label: "Feature Request", path: "/feature-request" },
-    { icon: <Calendar size={20} />, label: "Announcements", path: "/announcements" },
-    { icon: <Settings size={20} />, label: "Settings", path: "/settings" },
+    { icon: <HelpCircle size={20} className="text-sahla-purple" />, label: "Support", path: "/support" },
+    { icon: <MessageSquareHeart size={20} className="text-sahla-purple" />, label: "Feature Request", path: "/feature-request" },
+    { icon: <Calendar size={20} className="text-sahla-purple" />, label: "Announcements", path: "/announcements" },
+    { icon: <Settings size={20} className="text-sahla-purple" />, label: "Settings", path: "/settings" },
   ];
 
   return (
@@ -58,6 +59,7 @@ const DashboardSidebar = () => {
                     : "text-gray-700 hover:bg-gray-100"
                 }`
               }
+              end={item.path === "/dashboard"}
             >
               <span className="mr-3">{item.icon}</span>
               {item.label}
@@ -112,9 +114,9 @@ const DashboardSidebar = () => {
       
       <div className="p-4 border-t mt-auto">
         <div className="flex items-center">
-          <Avatar className="h-8 w-8 mr-2">
+          <Avatar className="h-8 w-8 mr-2 bg-sahla-purple/20">
             <AvatarImage src="" alt="User" />
-            <AvatarFallback className="bg-sahla-purple/20 text-sahla-purple">
+            <AvatarFallback className="text-sahla-purple">
               {user?.email?.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
@@ -122,9 +124,7 @@ const DashboardSidebar = () => {
             <p className="text-sm font-medium truncate">{user?.email}</p>
           </div>
           <button onClick={() => signOut()} className="text-gray-500 hover:text-gray-700">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-            </svg>
+            <LogOut size={18} />
           </button>
         </div>
       </div>
