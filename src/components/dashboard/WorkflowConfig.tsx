@@ -13,7 +13,6 @@ const platformOptions: PlatformOption[] = [
   { id: "tiktok", name: "TikTok", logo: "https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" },
   { id: "instagram", name: "Instagram", logo: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" },
   { id: "facebook", name: "Facebook", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" },
-  { id: "dropbox", name: "Dropbox", logo: "https://upload.wikimedia.org/wikipedia/commons/7/74/Dropbox_logo.svg" },
   { id: "youtube", name: "YouTube", logo: "https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" },
 ];
 
@@ -35,7 +34,7 @@ const WorkflowConfig = ({ title, description }: WorkflowConfigProps) => {
         <div>
           <h4 className="font-medium text-gray-700 mb-4">Source (choose one)</h4>
           <div className="space-y-2">
-            {platformOptions.slice(0, 4).map((platform) => (
+            {platformOptions.slice(0, 3).map((platform) => (
               <div 
                 key={platform.id}
                 className={`
