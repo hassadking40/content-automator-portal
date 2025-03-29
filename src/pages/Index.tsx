@@ -6,8 +6,11 @@ import FeaturesSection from "@/components/home/FeaturesSection";
 import PlatformsSection from "@/components/home/PlatformsSection";
 import PricingSection from "@/components/home/PricingSection";
 import CtaSection from "@/components/home/CtaSection";
+import { useLanguage, t } from "@/contexts/LanguageContext";
 
 const Index = () => {
+  const { language } = useLanguage();
+  
   useEffect(() => {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -53,7 +56,7 @@ const Index = () => {
   }, []);
   
   return (
-    <PageLayout title="Welcome to Our Platform" description="Your all-in-one solution for digital success">
+    <PageLayout title={t('hero.title')} description={t('hero.subtitle')}>
       <HeroSection />
       <FeaturesSection />
       <PlatformsSection />

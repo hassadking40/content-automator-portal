@@ -15,6 +15,7 @@ const LanguageSwitcher = () => {
   const languages: { value: Language; label: string }[] = [
     { value: "fr", label: "Français" },
     { value: "en", label: "English" },
+    { value: "ar", label: "العربية" },
   ];
 
   return (
@@ -23,7 +24,7 @@ const LanguageSwitcher = () => {
         <Button variant="outline" size="sm" className="h-8 gap-1 px-2">
           <Globe className="h-4 w-4" />
           <span className="hidden sm:inline-block">
-            {language === "fr" ? "FR" : "EN"}
+            {language === "fr" ? "FR" : language === "en" ? "EN" : "AR"}
           </span>
         </Button>
       </DropdownMenuTrigger>
