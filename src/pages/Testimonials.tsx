@@ -1,11 +1,41 @@
 
 import PageLayout from "@/components/layout/PageLayout";
+import { useLanguage, t } from "@/contexts/LanguageContext";
 
 const Testimonials = () => {
+  const { language } = useLanguage();
+  
+  const testimonials = [
+    {
+      name: "Alex Thompson",
+      role: "Marketing Director",
+      company: "Acme Inc",
+      quote: "This platform has completely transformed how our marketing team collaborates and executes campaigns. The ROI we've seen is incredible."
+    },
+    {
+      name: "Jessica Lee",
+      role: "CTO",
+      company: "TechStart",
+      quote: "As a fast-growing startup, we needed a solution that could scale with us. This platform has been the perfect fit, allowing us to stay agile while managing our increasing workload."
+    },
+    {
+      name: "Marcus Johnson",
+      role: "Operations Manager",
+      company: "Global Solutions",
+      quote: "The automation capabilities have saved our team countless hours on repetitive tasks. We're now able to focus on strategic initiatives that drive our business forward."
+    },
+    {
+      name: "Sophia Garcia",
+      role: "CEO",
+      company: "Innovate Design",
+      quote: "The insights we've gained through the analytics tools have helped us make data-driven decisions that have significantly improved our customer engagement."
+    }
+  ];
+
   return (
     <PageLayout 
-      title="Testimonials" 
-      description="See what our customers are saying about us"
+      title={t('testimonials')} 
+      description={t('customer.saying')}
     >
       <div className="space-y-8">
         {testimonials.map((testimonial, index) => (
@@ -27,32 +57,5 @@ const Testimonials = () => {
     </PageLayout>
   );
 };
-
-const testimonials = [
-  {
-    name: "Alex Thompson",
-    role: "Marketing Director",
-    company: "Acme Inc",
-    quote: "This platform has completely transformed how our marketing team collaborates and executes campaigns. The ROI we've seen is incredible."
-  },
-  {
-    name: "Jessica Lee",
-    role: "CTO",
-    company: "TechStart",
-    quote: "As a fast-growing startup, we needed a solution that could scale with us. This platform has been the perfect fit, allowing us to stay agile while managing our increasing workload."
-  },
-  {
-    name: "Marcus Johnson",
-    role: "Operations Manager",
-    company: "Global Solutions",
-    quote: "The automation capabilities have saved our team countless hours on repetitive tasks. We're now able to focus on strategic initiatives that drive our business forward."
-  },
-  {
-    name: "Sophia Garcia",
-    role: "CEO",
-    company: "Innovate Design",
-    quote: "The insights we've gained through the analytics tools have helped us make data-driven decisions that have significantly improved our customer engagement."
-  }
-];
 
 export default Testimonials;

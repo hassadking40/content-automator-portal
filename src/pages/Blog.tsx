@@ -1,12 +1,38 @@
 
 import { format } from "date-fns";
 import PageLayout from "@/components/layout/PageLayout";
+import { useLanguage, t } from "@/contexts/LanguageContext";
 
 const Blog = () => {
+  const { language } = useLanguage();
+  
+  const blogPosts = [
+    {
+      title: "Enhancing Productivity with Automation",
+      date: "2023-09-15",
+      excerpt: "Discover how automation can transform your workflow and boost productivity across your organization."
+    },
+    {
+      title: "The Future of Remote Work",
+      date: "2023-08-22",
+      excerpt: "Explore the latest trends in remote work and how technology is enabling more flexible work arrangements."
+    },
+    {
+      title: "Building a Data-Driven Culture",
+      date: "2023-07-10",
+      excerpt: "Learn how to foster a data-driven culture that empowers your team to make better decisions."
+    },
+    {
+      title: "Security Best Practices for Small Businesses",
+      date: "2023-06-05",
+      excerpt: "Essential security measures every small business should implement to protect sensitive data."
+    }
+  ];
+
   return (
     <PageLayout 
-      title="Blog" 
-      description="Latest news, updates and insights"
+      title={t('blog')} 
+      description={t('latest.news')}
     >
       <div className="grid md:grid-cols-2 gap-8">
         {blogPosts.map((post, index) => (
@@ -25,7 +51,7 @@ const Blog = () => {
                 href="#" 
                 className="text-primary hover:underline font-medium"
               >
-                Read more →
+                {t('read.more')} →
               </a>
             </div>
           </div>
@@ -34,28 +60,5 @@ const Blog = () => {
     </PageLayout>
   );
 };
-
-const blogPosts = [
-  {
-    title: "Enhancing Productivity with Automation",
-    date: "2023-09-15",
-    excerpt: "Discover how automation can transform your workflow and boost productivity across your organization."
-  },
-  {
-    title: "The Future of Remote Work",
-    date: "2023-08-22",
-    excerpt: "Explore the latest trends in remote work and how technology is enabling more flexible work arrangements."
-  },
-  {
-    title: "Building a Data-Driven Culture",
-    date: "2023-07-10",
-    excerpt: "Learn how to foster a data-driven culture that empowers your team to make better decisions."
-  },
-  {
-    title: "Security Best Practices for Small Businesses",
-    date: "2023-06-05",
-    excerpt: "Essential security measures every small business should implement to protect sensitive data."
-  }
-];
 
 export default Blog;

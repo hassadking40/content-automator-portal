@@ -1,11 +1,41 @@
 
 import PageLayout from "@/components/layout/PageLayout";
+import { useLanguage, t } from "@/contexts/LanguageContext";
 
 const Features = () => {
+  const { language } = useLanguage();
+  
+  const features = [
+    {
+      title: t('automated.workflows'),
+      description: t('workflows.description')
+    },
+    {
+      title: t('advanced.analytics'),
+      description: t('analytics.description')
+    },
+    {
+      title: t('user.management'),
+      description: t('management.description')
+    },
+    {
+      title: t('real.time.collaboration'),
+      description: t('collaboration.description')
+    },
+    {
+      title: t('custom.integration'),
+      description: t('integration.description')
+    },
+    {
+      title: t('secure.storage'),
+      description: t('storage.description')
+    }
+  ];
+
   return (
     <PageLayout 
-      title="Features" 
-      description="Discover all the powerful features our platform has to offer"
+      title={t('features')} 
+      description={t('features')}
     >
       <div className="space-y-8">
         <div className="grid md:grid-cols-2 gap-8">
@@ -20,32 +50,5 @@ const Features = () => {
     </PageLayout>
   );
 };
-
-const features = [
-  {
-    title: "Automated Workflows",
-    description: "Set up automated processes to save time and reduce manual work."
-  },
-  {
-    title: "Advanced Analytics",
-    description: "Get detailed insights into your business performance with our analytics tools."
-  },
-  {
-    title: "User Management",
-    description: "Easily manage users, roles, and permissions within your organization."
-  },
-  {
-    title: "Real-time Collaboration",
-    description: "Work together with your team in real-time on documents and projects."
-  },
-  {
-    title: "Custom Integration",
-    description: "Integrate with your existing tools and services with our API."
-  },
-  {
-    title: "Secure Storage",
-    description: "Keep your data safe with our enterprise-grade security measures."
-  }
-];
 
 export default Features;

@@ -76,6 +76,49 @@ const translationDictionaries: Record<Language, Record<string, string>> = {
     'terms': 'Terms',
     'privacy': 'Privacy',
     'cookies': 'Cookies',
+    
+    // Features page
+    'automated.workflows': 'Automated Workflows',
+    'advanced.analytics': 'Advanced Analytics',
+    'user.management': 'User Management',
+    'real.time.collaboration': 'Real-time Collaboration',
+    'custom.integration': 'Custom Integration',
+    'secure.storage': 'Secure Storage',
+    'workflows.description': 'Set up automated processes to save time and reduce manual work.',
+    'analytics.description': 'Get detailed insights into your business performance with our analytics tools.',
+    'management.description': 'Easily manage users, roles, and permissions within your organization.',
+    'collaboration.description': 'Work together with your team in real-time on documents and projects.',
+    'integration.description': 'Integrate with your existing tools and services with our API.',
+    'storage.description': 'Keep your data safe with our enterprise-grade security measures.',
+    
+    // Blog page
+    'read.more': 'Read more',
+    'latest.news': 'Latest news, updates and insights',
+    
+    // About page
+    'our.story': 'Our Story',
+    'our.mission': 'Our Mission',
+    'our.team': 'Our Team',
+    'story.content': 'Founded in 2020, our company started with a simple mission: to make technology more accessible and useful for businesses of all sizes. What began as a small team with big ideas has grown into a thriving platform used by thousands of companies worldwide.',
+    'mission.content': 'We believe in creating tools that empower businesses to do their best work. Our platform is designed to streamline workflows, enhance collaboration, and provide valuable insights that drive success.',
+    
+    // Pricing page
+    'choose.plan': 'Choose the right plan for your needs',
+    'most.popular': 'Most Popular',
+    'get.started': 'Get Started',
+    'month': '/month',
+    
+    // Integrations page
+    'connect.platform': 'Connect our platform with your favorite tools',
+    'learn.more': 'Learn more',
+    
+    // Careers page
+    'why.work': 'Why Work With Us',
+    'open.positions': 'Open Positions',
+    'view.position': 'View Position',
+    
+    // Testimonials page
+    'customer.saying': 'See what our customers are saying about us',
   },
   fr: {
     // Auth page
@@ -133,6 +176,49 @@ const translationDictionaries: Record<Language, Record<string, string>> = {
     'terms': 'Conditions',
     'privacy': 'Confidentialité',
     'cookies': 'Cookies',
+    
+    // Features page
+    'automated.workflows': 'Flux de travail automatisés',
+    'advanced.analytics': 'Analyses avancées',
+    'user.management': 'Gestion des utilisateurs',
+    'real.time.collaboration': 'Collaboration en temps réel',
+    'custom.integration': 'Intégration personnalisée',
+    'secure.storage': 'Stockage sécurisé',
+    'workflows.description': 'Configurez des processus automatisés pour gagner du temps et réduire le travail manuel.',
+    'analytics.description': 'Obtenez des informations détaillées sur les performances de votre entreprise avec nos outils d\'analyse.',
+    'management.description': 'Gérez facilement les utilisateurs, les rôles et les autorisations au sein de votre organisation.',
+    'collaboration.description': 'Travaillez avec votre équipe en temps réel sur des documents et des projets.',
+    'integration.description': 'Intégrez vos outils et services existants avec notre API.',
+    'storage.description': 'Gardez vos données en sécurité avec nos mesures de sécurité de niveau entreprise.',
+    
+    // Blog page
+    'read.more': 'Lire plus',
+    'latest.news': 'Dernières actualités, mises à jour et informations',
+    
+    // About page
+    'our.story': 'Notre histoire',
+    'our.mission': 'Notre mission',
+    'our.team': 'Notre équipe',
+    'story.content': 'Fondée en 2020, notre entreprise a commencé avec une mission simple : rendre la technologie plus accessible et utile pour les entreprises de toutes tailles. Ce qui a commencé comme une petite équipe avec de grandes idées est devenu une plateforme florissante utilisée par des milliers d\'entreprises dans le monde entier.',
+    'mission.content': 'Nous croyons en la création d\'outils qui permettent aux entreprises de faire leur meilleur travail. Notre plateforme est conçue pour rationaliser les flux de travail, améliorer la collaboration et fournir des informations précieuses qui favorisent le succès.',
+    
+    // Pricing page
+    'choose.plan': 'Choisissez le plan qui convient à vos besoins',
+    'most.popular': 'Le plus populaire',
+    'get.started': 'Commencer',
+    'month': '/mois',
+    
+    // Integrations page
+    'connect.platform': 'Connectez notre plateforme à vos outils préférés',
+    'learn.more': 'En savoir plus',
+    
+    // Careers page
+    'why.work': 'Pourquoi travailler avec nous',
+    'open.positions': 'Postes ouverts',
+    'view.position': 'Voir le poste',
+    
+    // Testimonials page
+    'customer.saying': 'Découvrez ce que nos clients disent de nous',
   }
 };
 

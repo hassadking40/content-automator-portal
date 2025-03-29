@@ -1,29 +1,41 @@
 
 import PageLayout from "@/components/layout/PageLayout";
+import { useLanguage, t } from "@/contexts/LanguageContext";
 
 const About = () => {
+  const { language } = useLanguage();
+  
+  const team = [
+    { name: "Sarah Johnson", role: "CEO & Founder" },
+    { name: "Michael Chen", role: "CTO" },
+    { name: "Emily Rodriguez", role: "Head of Design" },
+    { name: "David Kim", role: "Lead Developer" },
+    { name: "Olivia Smith", role: "Marketing Director" },
+    { name: "James Wilson", role: "Customer Success" }
+  ];
+
   return (
     <PageLayout 
-      title="About Us" 
-      description="Learn more about our company and mission"
+      title={t('about')} 
+      description={t('about')}
     >
       <div className="space-y-8">
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Our Story</h2>
+          <h2 className="text-2xl font-semibold mb-4">{t('our.story')}</h2>
           <p className="text-gray-600 dark:text-gray-300">
-            Founded in 2020, our company started with a simple mission: to make technology more accessible and useful for businesses of all sizes. What began as a small team with big ideas has grown into a thriving platform used by thousands of companies worldwide.
+            {t('story.content')}
           </p>
         </section>
         
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
+          <h2 className="text-2xl font-semibold mb-4">{t('our.mission')}</h2>
           <p className="text-gray-600 dark:text-gray-300">
-            We believe in creating tools that empower businesses to do their best work. Our platform is designed to streamline workflows, enhance collaboration, and provide valuable insights that drive success.
+            {t('mission.content')}
           </p>
         </section>
         
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Our Team</h2>
+          <h2 className="text-2xl font-semibold mb-4">{t('our.team')}</h2>
           <div className="grid md:grid-cols-3 gap-6 mt-4">
             {team.map((member, index) => (
               <div key={index} className="text-center">
@@ -38,14 +50,5 @@ const About = () => {
     </PageLayout>
   );
 };
-
-const team = [
-  { name: "Sarah Johnson", role: "CEO & Founder" },
-  { name: "Michael Chen", role: "CTO" },
-  { name: "Emily Rodriguez", role: "Head of Design" },
-  { name: "David Kim", role: "Lead Developer" },
-  { name: "Olivia Smith", role: "Marketing Director" },
-  { name: "James Wilson", role: "Customer Success" }
-];
 
 export default About;
