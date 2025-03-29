@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { toast } from "sonner";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -26,6 +27,14 @@ const DashboardLayout = ({ children, title, description }: DashboardLayoutProps)
       navigate("/auth");
     }
   }, [user, isLoading, navigate]);
+
+  const handleNewAutomation = () => {
+    navigate('/dashboard/calendar');
+  };
+  
+  const handleNotifications = () => {
+    toast.info("You have no new notifications");
+  };
 
   if (isLoading) {
     return (
@@ -46,7 +55,7 @@ const DashboardLayout = ({ children, title, description }: DashboardLayoutProps)
   const planType = "Free Plan";
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-white to-blue-50">
+    <div className="flex min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-white">
       {/* Desktop sidebar */}
       {!isMobile && <DashboardSidebar />}
       
@@ -68,7 +77,7 @@ const DashboardLayout = ({ children, title, description }: DashboardLayoutProps)
         </Sheet>
       )}
       
-      <div className="flex-1 overflow-y-auto bg-gradient-to-br from-sahla-blue/5 to-white">
+      <div className="flex-1 overflow-y-auto bg-gradient-to-br from-blue-50/50 via-indigo-50/30 to-white">
         <div className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b p-4 flex items-center justify-between">
           <div className="flex items-center">
             <span className="text-lg font-semibold text-sahla-blue mr-2">Sahla-</span>
@@ -77,11 +86,21 @@ const DashboardLayout = ({ children, title, description }: DashboardLayoutProps)
           </div>
           
           <div className="flex items-center space-x-3">
-            <Button variant="outline" size="sm" className="flex items-center gap-2 hidden md:flex">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="flex items-center gap-2 hidden md:flex"
+              onClick={handleNewAutomation}
+            >
               <Plus size={16} /> New Automation
             </Button>
             
-            <Button variant="ghost" size="icon" className="relative">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="relative"
+              onClick={handleNotifications}
+            >
               <Bell size={20} />
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
             </Button>
@@ -106,7 +125,12 @@ const DashboardLayout = ({ children, title, description }: DashboardLayoutProps)
             </div>
             
             {title === "Welcome back, email!" && (
-              <Button className="mt-4 sm:mt-0 bg-sahla-blue text-white">Upgrade Plan</Button>
+              <Button 
+                className="mt-4 sm:mt-0 bg-sahla-blue text-white"
+                onClick={() => toast.info("Upgrade options coming soon!")}
+              >
+                Upgrade Plan
+              </Button>
             )}
           </div>
           

@@ -13,6 +13,18 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const firstName = user?.email?.split('@')[0] || 'there';
 
+  const handleCreateAutomation = () => {
+    navigate('/dashboard/calendar');
+  };
+
+  const handleConnectPlatforms = () => {
+    navigate('/dashboard/connections');
+  };
+
+  const handleAdvancedSetup = () => {
+    navigate('/dashboard/connections');
+  };
+
   return (
     <DashboardLayout 
       title={`Welcome back, ${firstName}!`}
@@ -104,7 +116,10 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border shadow-sm hover:shadow transition-all cursor-pointer">
+          <Card 
+            className="bg-white/80 backdrop-blur-sm border shadow-sm hover:shadow transition-all cursor-pointer"
+            onClick={handleConnectPlatforms}
+          >
             <CardContent className="flex flex-col items-center justify-center py-8">
               <div className="bg-blue-100 rounded-full p-3 mb-3">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
@@ -115,7 +130,10 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border shadow-sm hover:shadow transition-all cursor-pointer">
+          <Card 
+            className="bg-white/80 backdrop-blur-sm border shadow-sm hover:shadow transition-all cursor-pointer"
+            onClick={handleConnectPlatforms}
+          >
             <CardContent className="flex flex-col items-center justify-center py-8">
               <div className="bg-teal-100 rounded-full p-3 mb-3">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-teal-500" viewBox="0 0 24 24" fill="currentColor">
@@ -128,12 +146,20 @@ const Dashboard = () => {
         </div>
 
         <div className="flex justify-between mt-5">
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button 
+            variant="outline" 
+            className="flex items-center gap-2"
+            onClick={handleConnectPlatforms}
+          >
             <Plus size={16} />
             Connect More Platforms
           </Button>
           
-          <Button variant="default" className="flex items-center gap-2 bg-sahla-blue hover:bg-sahla-blue/90">
+          <Button 
+            variant="default" 
+            className="flex items-center gap-2 bg-sahla-blue hover:bg-sahla-blue/90"
+            onClick={handleAdvancedSetup}
+          >
             Advanced API Setup <ArrowRight size={16} />
           </Button>
         </div>
@@ -154,7 +180,7 @@ const Dashboard = () => {
             </p>
             <Button 
               variant="gradient" 
-              onClick={() => navigate('/dashboard/calendar')}
+              onClick={handleCreateAutomation}
               className="flex items-center gap-2"
             >
               Create New Automation <Plus size={16} />

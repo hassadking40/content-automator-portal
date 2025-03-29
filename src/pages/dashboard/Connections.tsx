@@ -4,8 +4,25 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button-custom";
 import { Badge } from "@/components/ui/badge";
 import { Plus } from "lucide-react";
+import { toast } from "sonner";
 
 const Connections = () => {
+  const handleConfigurePlatform = (platformName: string) => {
+    toast.info(`${platformName} configuration coming soon!`);
+  };
+
+  const handleDisconnectPlatform = (platformName: string) => {
+    toast.success(`${platformName} has been disconnected.`);
+  };
+
+  const handleConnectPlatform = (platformName: string) => {
+    toast.info(`${platformName} connection functionality coming soon!`);
+  };
+
+  const handleAddCustomPlatform = () => {
+    toast.info("Custom platform configuration coming soon!");
+  };
+
   return (
     <DashboardLayout
       title="Platform Connections"
@@ -22,8 +39,21 @@ const Connections = () => {
             <h3 className="text-lg font-semibold">YouTube</h3>
             <Badge variant="outline" className="mt-2 bg-green-100 text-green-700 border-green-200">Connected</Badge>
             <div className="mt-4 space-y-2">
-              <Button variant="outline" size="sm">Configure</Button>
-              <Button variant="outline" size="sm" className="text-red-500 hover:text-red-700">Disconnect</Button>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => handleConfigurePlatform("YouTube")}
+              >
+                Configure
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="text-red-500 hover:text-red-700"
+                onClick={() => handleDisconnectPlatform("YouTube")}
+              >
+                Disconnect
+              </Button>
             </div>
           </CardContent>
         </Card>
@@ -38,13 +68,29 @@ const Connections = () => {
             <h3 className="text-lg font-semibold">Instagram</h3>
             <Badge variant="outline" className="mt-2 bg-green-100 text-green-700 border-green-200">Connected</Badge>
             <div className="mt-4 space-y-2">
-              <Button variant="outline" size="sm">Configure</Button>
-              <Button variant="outline" size="sm" className="text-red-500 hover:text-red-700">Disconnect</Button>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => handleConfigurePlatform("Instagram")}
+              >
+                Configure
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="text-red-500 hover:text-red-700"
+                onClick={() => handleDisconnectPlatform("Instagram")}
+              >
+                Disconnect
+              </Button>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-white/80 backdrop-blur-sm border shadow-sm hover:shadow transition-all cursor-pointer">
+        <Card 
+          className="bg-white/80 backdrop-blur-sm border shadow-sm hover:shadow transition-all cursor-pointer"
+          onClick={() => handleConnectPlatform("Facebook")}
+        >
           <CardContent className="flex flex-col items-center justify-center py-8">
             <div className="bg-blue-100 rounded-full p-3 mb-3">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
@@ -52,11 +98,20 @@ const Connections = () => {
               </svg>
             </div>
             <h3 className="text-lg font-semibold">Facebook</h3>
-            <Button variant="default" className="mt-4">Connect</Button>
+            <Button 
+              variant="default" 
+              className="mt-4"
+              onClick={() => handleConnectPlatform("Facebook")}
+            >
+              Connect
+            </Button>
           </CardContent>
         </Card>
 
-        <Card className="bg-white/80 backdrop-blur-sm border shadow-sm hover:shadow transition-all cursor-pointer">
+        <Card 
+          className="bg-white/80 backdrop-blur-sm border shadow-sm hover:shadow transition-all cursor-pointer"
+          onClick={() => handleConnectPlatform("TikTok")}
+        >
           <CardContent className="flex flex-col items-center justify-center py-8">
             <div className="bg-teal-100 rounded-full p-3 mb-3">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-teal-500" viewBox="0 0 24 24" fill="currentColor">
@@ -64,11 +119,20 @@ const Connections = () => {
               </svg>
             </div>
             <h3 className="text-lg font-semibold">TikTok</h3>
-            <Button variant="default" className="mt-4">Connect</Button>
+            <Button 
+              variant="default" 
+              className="mt-4"
+              onClick={() => handleConnectPlatform("TikTok")}
+            >
+              Connect
+            </Button>
           </CardContent>
         </Card>
 
-        <Card className="bg-white/80 backdrop-blur-sm border shadow-sm hover:shadow transition-all cursor-pointer">
+        <Card 
+          className="bg-white/80 backdrop-blur-sm border shadow-sm hover:shadow transition-all cursor-pointer"
+          onClick={() => handleConnectPlatform("Twitter/X")}
+        >
           <CardContent className="flex flex-col items-center justify-center py-8">
             <div className="bg-blue-100 rounded-full p-3 mb-3">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
@@ -76,18 +140,33 @@ const Connections = () => {
               </svg>
             </div>
             <h3 className="text-lg font-semibold">Twitter/X</h3>
-            <Button variant="default" className="mt-4">Connect</Button>
+            <Button 
+              variant="default" 
+              className="mt-4"
+              onClick={() => handleConnectPlatform("Twitter/X")}
+            >
+              Connect
+            </Button>
           </CardContent>
         </Card>
 
-        <Card className="bg-white/80 backdrop-blur-sm border border-dashed shadow-sm hover:shadow transition-all cursor-pointer">
+        <Card 
+          className="bg-white/80 backdrop-blur-sm border border-dashed shadow-sm hover:shadow transition-all cursor-pointer"
+          onClick={handleAddCustomPlatform}
+        >
           <CardContent className="flex flex-col items-center justify-center py-8">
             <div className="bg-gray-100 rounded-full p-3 mb-3">
               <Plus className="h-8 w-8 text-gray-500" />
             </div>
             <h3 className="text-lg font-semibold">Add Custom Platform</h3>
             <p className="text-gray-500 text-sm text-center mt-2">Connect a custom API endpoint</p>
-            <Button variant="outline" className="mt-4">Configure</Button>
+            <Button 
+              variant="outline" 
+              className="mt-4"
+              onClick={handleAddCustomPlatform}
+            >
+              Configure
+            </Button>
           </CardContent>
         </Card>
       </div>

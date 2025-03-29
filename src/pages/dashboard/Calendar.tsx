@@ -3,8 +3,14 @@ import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button-custom";
 import { Plus, Calendar as CalendarIcon } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const Calendar = () => {
+  const handleCreateAutomation = () => {
+    toast.info("Automation feature coming soon!");
+  };
+
   return (
     <DashboardLayout
       title="Content Calendar"
@@ -23,6 +29,7 @@ const Calendar = () => {
           <Button 
             variant="gradient" 
             className="flex items-center gap-2"
+            onClick={handleCreateAutomation}
           >
             Create New Automation <Plus size={16} />
           </Button>

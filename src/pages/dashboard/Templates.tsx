@@ -3,8 +3,17 @@ import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button-custom";
 import { Plus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const Templates = () => {
+  const navigate = useNavigate();
+  
+  const handleCreateTemplate = () => {
+    toast.info("Template feature coming soon!");
+  };
+
   return (
     <DashboardLayout
       title="Content Templates"
@@ -23,6 +32,7 @@ const Templates = () => {
           <Button 
             variant="gradient" 
             className="flex items-center gap-2"
+            onClick={handleCreateTemplate}
           >
             Create New Template <Plus size={16} />
           </Button>
