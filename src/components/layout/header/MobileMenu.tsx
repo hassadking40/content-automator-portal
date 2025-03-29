@@ -1,90 +1,120 @@
 
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { User, LogOut } from "lucide-react";
-import { Button } from "@/components/ui/button-custom";
-import { cn } from "@/lib/utils";
-import { useAuth } from "@/contexts/AuthContext";
-import { NavLink } from "./NavLink";
+import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { NavLinks } from "./NavLinks";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button-custom";
+import { useLanguage, t } from "@/contexts/LanguageContext";
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  onSignOut: () => Promise<void>;
+  onSignOut: () => void;
 }
 
 const MobileMenu = ({ isOpen, onClose, onSignOut }: MobileMenuProps) => {
   const { user } = useAuth();
-  const navigate = useNavigate();
+  const { language } = useLanguage();
+
+  // Close mobile menu on larger screens
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && isOpen) {
+        onClose();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isOpen, onClose]);
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   return (
-    <div
-      className={cn(
-        "fixed inset-0 top-[72px] bg-white dark:bg-sahla-dark z-40 transform transition-transform duration-300 md:hidden overflow-auto",
-        isOpen ? "translate-x-0" : "translate-x-full"
-      )}
-    >
-      <div className="container mx-auto py-8 px-6 flex flex-col h-full">
-        <nav className="flex flex-col space-y-6 mb-8">
-          {NavLinks.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              className="text-sahla-dark dark:text-white text-lg font-medium py-2 border-b border-border"
-              onClick={onClose}
-            >
-              {link.name}
-            </NavLink>
-          ))}
-          {user && (
-            <Link
-              to="/dashboard"
-              className="text-sahla-dark dark:text-white text-lg font-medium py-2 border-b border-border"
-              onClick={onClose}
-            >
-              Dashboard
-            </Link>
-          )}
+    <div className="fixed inset-0 bg-white/95 dark:bg-sahla-dark/95 backdrop-blur-sm z-40 md:hidden">
+      <div className="flex flex-col h-full pt-20 px-6 pb-6">
+        <nav className="flex-1">
+          <ul className="space-y-6 py-6">
+            {NavLinks.map((link) => (
+              <li key={link.name}>
+                <NavLink
+                  to={link.path}
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `block text-lg font-medium ${
+                      isActive
+                        ? "text-primary"
+                        : "text-sahla-dark dark:text-white"
+                    }`
+                  }
+                >
+                  {t(link.name.toLowerCase())}
+                </NavLink>
+              </li>
+            ))}
+            {user && (
+              <li>
+                <NavLink
+                  to="/dashboard"
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `block text-lg font-medium ${
+                      isActive
+                        ? "text-primary"
+                        : "text-sahla-dark dark:text-white"
+                    }`
+                  }
+                >
+                  {t('dashboard')}
+                </NavLink>
+              </li>
+            )}
+          </ul>
         </nav>
-        <div className="flex flex-col space-y-4 mt-auto mb-12">
+
+        <div className="mt-auto space-y-4">
           {user ? (
-            <>
-              <div className="px-2 py-4 border-t border-border">
-                <p className="text-sm text-gray-500 dark:text-gray-400">Signed in as</p>
-                <p className="font-medium">{user.email}</p>
-              </div>
-              <Link to="/dashboard" onClick={onClose}>
-                <Button variant="outline" className="w-full justify-start">
-                  <User className="mr-2 h-4 w-4" />
-                  Dashboard
-                </Button>
-              </Link>
-              <Button 
-                variant="destructive" 
-                className="w-full justify-start" 
-                onClick={async () => {
-                  await onSignOut();
-                  onClose();
-                }}
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Sign out
-              </Button>
-            </>
+            <Button
+              onClick={() => {
+                onSignOut();
+                onClose();
+              }}
+              variant="outline"
+              className="w-full"
+            >
+              {t('sign.out')}
+            </Button>
           ) : (
-            <>
-              <Link to="/auth" onClick={onClose}>
-                <Button variant="outline" className="w-full">
-                  Log in
-                </Button>
-              </Link>
-              <Link to="/auth" onClick={onClose}>
-                <Button variant="gradient" className="w-full" shine>
-                  Get Started
-                </Button>
-              </Link>
-            </>
+            <div className="flex flex-col space-y-3">
+              <Button
+                onClick={onClose}
+                asChild
+                variant="default"
+                className="w-full"
+              >
+                <NavLink to="/auth">{t('sign.in')}</NavLink>
+              </Button>
+              <Button
+                onClick={onClose}
+                asChild
+                variant="gradient"
+                className="w-full"
+              >
+                <NavLink to="/auth">{t('sign.up')}</NavLink>
+              </Button>
+            </div>
           )}
         </div>
       </div>

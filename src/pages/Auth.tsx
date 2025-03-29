@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage, t } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button-custom";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,6 +18,7 @@ const Auth = () => {
   const { user, signIn, signUp } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { language } = useLanguage();
 
   // If user is already logged in, redirect to dashboard
   if (user) {
@@ -90,19 +92,19 @@ const Auth = () => {
               </div>
             </div>
             <h2 className="text-2xl font-bold text-sahla-dark dark:text-white font-display">
-              {isSignUp ? "Create an Account" : "Welcome Back"}
+              {isSignUp ? t('create.account') : t('welcome.back')}
             </h2>
             <p className="text-gray-500 dark:text-gray-400 mt-2">
               {isSignUp
-                ? "Sign up to start automating your social media"
-                : "Sign in to your Sahla-Post account"}
+                ? t('start.automating')
+                : t('social.media.automation')}
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="px-8 pb-8 space-y-5">
             {isSignUp && (
               <div className="space-y-2">
-                <Label htmlFor="fullName">Full Name</Label>
+                <Label htmlFor="fullName">{t('full.name')}</Label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <User className="h-5 w-5 text-gray-400" />
@@ -113,7 +115,7 @@ const Auth = () => {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     className="pl-10"
-                    placeholder="Your full name"
+                    placeholder={t('full.name')}
                     required
                   />
                 </div>
@@ -121,7 +123,7 @@ const Auth = () => {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('email')}</Label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Mail className="h-5 w-5 text-gray-400" />
@@ -139,7 +141,7 @@ const Auth = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('password')}</Label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Lock className="h-5 w-5 text-gray-400" />
@@ -163,7 +165,7 @@ const Auth = () => {
                   href="#"
                   className="text-sm text-primary hover:text-primary/80 transition-colors"
                 >
-                  Forgot password?
+                  {t('forgot.password')}
                 </a>
               </div>
             )}
@@ -175,18 +177,18 @@ const Auth = () => {
               isLoading={isSubmitting}
               shine
             >
-              {isSignUp ? "Create Account" : "Sign In"}
+              {isSignUp ? t('sign.up') : t('sign.in')}
             </Button>
 
             <div className="text-center mt-6">
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                {isSignUp ? "Already have an account?" : "Don't have an account?"}
+                {isSignUp ? t('already.have.account') : t('dont.have.account')}
                 <button
                   type="button"
                   onClick={toggleAuthMode}
                   className="ml-2 text-primary hover:text-primary/80 transition-colors font-medium"
                 >
-                  {isSignUp ? "Sign In" : "Sign Up"}
+                  {isSignUp ? t('sign.in') : t('sign.up')}
                 </button>
               </p>
             </div>

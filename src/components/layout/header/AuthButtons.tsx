@@ -1,30 +1,20 @@
 
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button-custom";
+import { useLanguage, t } from "@/contexts/LanguageContext";
 
 const AuthButtons = () => {
+  const { language } = useLanguage();
+  
   return (
-    <>
-      <Link to="/auth">
-        <Button 
-          variant="outline" 
-          size="sm"
-          className="font-medium"
-        >
-          Log in
-        </Button>
-      </Link>
-      <Link to="/auth">
-        <Button
-          variant="gradient"
-          size="sm"
-          shine
-          className="font-medium"
-        >
-          Get Started
-        </Button>
-      </Link>
-    </>
+    <div className="flex items-center space-x-3">
+      <Button variant="outline" size="sm" asChild>
+        <Link to="/auth">{t('sign.in')}</Link>
+      </Button>
+      <Button variant="gradient" size="sm" asChild shine>
+        <Link to="/auth">{t('sign.up')}</Link>
+      </Button>
+    </div>
   );
 };
 

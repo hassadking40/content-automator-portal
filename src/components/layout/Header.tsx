@@ -10,7 +10,9 @@ import Logo from "./header/Logo";
 import UserMenu from "./header/UserMenu";
 import AuthButtons from "./header/AuthButtons";
 import MobileMenu from "./header/MobileMenu";
+import LanguageSwitcher from "./header/LanguageSwitcher";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLanguage, t } from "@/contexts/LanguageContext";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,6 +20,7 @@ const Header = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { language } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,18 +62,19 @@ const Header = () => {
                 key={link.name}
                 to={link.path}
               >
-                {link.name}
+                {t(link.name.toLowerCase())}
               </NavLink>
             ))}
             {user && (
               <NavLink to="/dashboard">
-                Dashboard
+                {t('dashboard')}
               </NavLink>
             )}
           </nav>
 
           {/* Action Buttons */}
           <div className="hidden md:flex items-center space-x-4">
+            <LanguageSwitcher />
             {user ? (
               <UserMenu email={user.email || "User"} onSignOut={handleSignOut} />
             ) : (
@@ -79,13 +83,16 @@ const Header = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMobileMenu}
-            className="md:hidden text-sahla-dark dark:text-white p-2"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex md:hidden items-center space-x-2">
+            <LanguageSwitcher />
+            <button
+              onClick={toggleMobileMenu}
+              className="text-sahla-dark dark:text-white p-2"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
