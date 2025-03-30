@@ -2,6 +2,8 @@
 import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { cn } from "@/lib/utils";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -10,8 +12,10 @@ interface PageLayoutProps {
 }
 
 const PageLayout = ({ children, title, description }: PageLayoutProps) => {
+  const { direction } = useLanguage();
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className={cn("min-h-screen flex flex-col", direction === "rtl" && "text-right")}>
       <Header />
       <main className="flex-grow pt-16 md:pt-20">
         <div className="container mx-auto px-4 py-8 md:py-12">

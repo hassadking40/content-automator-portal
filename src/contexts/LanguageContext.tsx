@@ -10,6 +10,7 @@ const LanguageContext = createContext<LanguageContextType>({
   language: 'fr',
   setLanguage: () => {},
   translations: {},
+  direction: 'ltr',
 });
 
 // Translation dictionaries
@@ -19,6 +20,9 @@ const translationDictionaries: Record<Language, Record<string, string>> = {
   ar: arTranslations
 };
 
+// Languages that use RTL direction
+const rtlLanguages: Language[] = ['ar'];
+
 interface LanguageProviderProps {
   children: ReactNode;
 }
@@ -27,12 +31,21 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   // Initialize with French as default
   const [language, setLanguageState] = useState<Language>('fr');
   const [translations, setTranslations] = useState(translationDictionaries.fr);
+  const [direction, setDirection] = useState<'ltr' | 'rtl'>('ltr');
 
   // Set language and update translations
   const setLanguage = (newLanguage: Language) => {
     setLanguageState(newLanguage);
     localStorage.setItem('sahlapost-language', newLanguage);
     setTranslations(translationDictionaries[newLanguage]);
+    
+    // Set direction based on language
+    const newDirection = rtlLanguages.includes(newLanguage) ? 'rtl' : 'ltr';
+    setDirection(newDirection);
+    
+    // Apply direction to document
+    document.documentElement.dir = newDirection;
+    document.documentElement.lang = newLanguage;
   };
 
   // On mount, check if language preference is stored
@@ -44,7 +57,7 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   }, []);
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, translations }}>
+    <LanguageContext.Provider value={{ language, setLanguage, translations, direction }}>
       {children}
     </LanguageContext.Provider>
   );

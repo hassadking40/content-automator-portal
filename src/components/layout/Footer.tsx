@@ -1,9 +1,16 @@
 
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { cn } from "@/lib/utils";
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const { direction, language, setLanguage } = useLanguage();
+
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLanguage(e.target.value as 'fr' | 'en' | 'ar');
+  };
 
   return (
     <footer className="bg-gray-50 dark:bg-sahla-dark/50 border-t border-border">
@@ -11,7 +18,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10">
           {/* Brand Column */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-2">
+            <div className={cn(
+              "flex items-center",
+              direction === "ltr" ? "space-x-2" : "space-x-reverse space-x-2"
+            )}>
               <div className="bg-gradient-to-r from-sahla-blue to-sahla-purple rounded-lg p-1 w-10 h-10 flex items-center justify-center">
                 <span className="text-white font-bold text-lg">SP</span>
               </div>
@@ -22,7 +32,10 @@ const Footer = () => {
             <p className="text-muted-foreground max-w-xs">
               Automate your social media content scheduling and posting across multiple platforms.
             </p>
-            <div className="flex space-x-4">
+            <div className={cn(
+              "flex",
+              direction === "ltr" ? "space-x-4" : "space-x-reverse space-x-4"
+            )}>
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                 <Facebook size={20} />
               </a>
@@ -94,12 +107,19 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className={cn(
+          "border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center",
+          direction === "rtl" && "md:flex-row-reverse"
+        )}>
           <p className="text-muted-foreground text-sm">
             &copy; {year} Sahla-Post. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0">
-            <select className="bg-transparent border border-border rounded-md p-2 text-sm text-muted-foreground">
+            <select 
+              className="bg-transparent border border-border rounded-md p-2 text-sm text-muted-foreground"
+              value={language}
+              onChange={handleLanguageChange}
+            >
               <option value="en">English</option>
               <option value="fr">Français</option>
               <option value="ar">العربية</option>

@@ -20,7 +20,7 @@ const Header = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const { language } = useLanguage();
+  const { language, direction } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +56,10 @@ const Header = () => {
           <Logo />
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-4 lg:space-x-8">
+          <nav className={cn(
+            "hidden md:flex items-center",
+            direction === "ltr" ? "space-x-4 lg:space-x-8" : "space-x-reverse space-x-4 lg:space-x-8"
+          )}>
             {NavLinks.map((link) => (
               <NavLink
                 key={link.name}
@@ -73,7 +76,10 @@ const Header = () => {
           </nav>
 
           {/* Action Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className={cn(
+            "hidden md:flex items-center",
+            direction === "ltr" ? "space-x-4" : "space-x-reverse space-x-4"
+          )}>
             <LanguageSwitcher />
             {user ? (
               <UserMenu email={user.email || "User"} onSignOut={handleSignOut} />
@@ -83,7 +89,10 @@ const Header = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center space-x-2">
+          <div className={cn(
+            "flex md:hidden items-center",
+            direction === "ltr" ? "space-x-2" : "space-x-reverse space-x-2"
+          )}>
             <LanguageSwitcher />
             <button
               onClick={toggleMobileMenu}

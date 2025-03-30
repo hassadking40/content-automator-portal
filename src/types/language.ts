@@ -7,4 +7,5 @@ export type LanguageContextType = {
   language: Language;
   setLanguage: (language: Language) => void;
   translations: Record<string, string>;
+  direction: 'ltr' | 'rtl';
 };

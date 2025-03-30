@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { cn } from "@/lib/utils";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -21,6 +23,7 @@ const DashboardLayout = ({ children, title, description }: DashboardLayoutProps)
   const isMobile = useIsMobile();
   const { user, isLoading } = useAuth();
   const navigate = useNavigate();
+  const { direction } = useLanguage();
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -55,7 +58,10 @@ const DashboardLayout = ({ children, title, description }: DashboardLayoutProps)
   const planType = "Free Plan";
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-white">
+    <div className={cn(
+      "flex min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-white",
+      direction === "rtl" && "text-right"
+    )}>
       {/* Desktop sidebar */}
       {!isMobile && <DashboardSidebar />}
       
@@ -66,12 +72,15 @@ const DashboardLayout = ({ children, title, description }: DashboardLayoutProps)
             <Button 
               variant="ghost" 
               size="icon" 
-              className="fixed top-4 left-4 z-40"
+              className={cn(
+                "fixed top-4 z-40",
+                direction === "ltr" ? "left-4" : "right-4"
+              )}
             >
               <Menu className="h-6 w-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="p-0 w-[270px]">
+          <SheetContent side={direction === "ltr" ? "left" : "right"} className="p-0 w-[270px]">
             <DashboardSidebar />
           </SheetContent>
         </Sheet>
